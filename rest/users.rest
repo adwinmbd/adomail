@@ -1,0 +1,37 @@
+### Get API
+GET http://localhost:99/ HTTP/1.1
+
+### GET All Users
+GET http://localhost:99/users HTTP/1.1
+
+### Adding user
+POST http://localhost:99/users HTTP/1.1 
+content-type: application/json
+
+{
+    "username": "femi",
+	"email": "femi@femi.com",
+	"password": "femi"
+}
+
+### Changing password
+PUT http://localhost:99/users/1 HTTP/1.1 
+content-type: application/json
+
+{
+    "username": "dana",
+	"email": "dana@dana.com",
+    "password": "dana"
+}
+
+### Delete User
+DELETE http://localhost:99/users/4 HTTP/1.1 
+
+### Password recovery e-mail
+PUT http://localhost:99/users/password/email/fbc553b538f7c2f551a8/danilo@danilo.com HTTP/1.1 
+content-type: application/json
+
+{
+	"email": "danilo@danilo.com"
+}
+
