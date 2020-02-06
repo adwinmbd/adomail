@@ -1,4 +1,5 @@
-#  ADOMAIL
+# ADOMAIL
+
 > This is project to demonstrate a REST API with e-mail functionality using [AdonisJS](https://adonisjs.com/)
 
 ## Setup
@@ -12,7 +13,6 @@ $ npm install
 ### Environment variables
 
 Duplicate `.env.example` and rename it `.env`
-
 
 ### Migrations
 
@@ -37,6 +37,12 @@ MAIL_HOST=smtp.mailtrap.io
 MAIL_PORT=2525
 MAIL_USERNAME=
 MAIL_PASSWORD=
+```
+
+Run this command to generate a key for the app.
+
+```bash
+$ adonis key:generate
 ```
 
 Run the following command to run migration.
