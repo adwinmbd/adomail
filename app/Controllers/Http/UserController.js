@@ -35,7 +35,7 @@ class UserController {
       // if user doesn't exist, proceeds with saving him in DB
       const user = await User.create(data);
 
-      return user;
+      return response.json({ message: "user added ..." });
     } catch (err) {
       return response.status(err.status).send(err);
     }
@@ -48,27 +48,33 @@ class UserController {
       "password"
     ]);
 
-    // looking for user in DB
-    const user = await User.findBy("id", id);
+    try {
+      // looking for user in DB
+      const user = await User.findBy("id", id);
 
-    if (user) {
-      // checking if old password informed is correct
-      /*const passwordCheck = await Hash.verify(password, user.password);
+      if (user) {
+        // checking if old password informed is correct
+        /*const passwordCheck = await Hash.verify(password, user.password);
 
-      if (!passwordCheck) {
-        return response
-          .status(400)
-          .send({ message: { error: "Incorrect password provided" } });
-      }*/
+        if (!passwordCheck) {
+          return response
+            .status(400)
+            .send({ message: { error: "Incorrect password provided" } });
+        }*/
 
-      // updating user data
-      user.username = username;
-      user.email = email;
-      user.password = password;
+        // updating user data
+        user.username = username;
+        user.email = email;
+        user.password = password;
 
-      // persisting new data (saving)
-      await user.save();
-      return response.json({ message: "user updated!" });
+        // persisting new data (saving)
+        await user.save();
+        return response.json({ message: "user updated!" });
+      }
+      return response.json({ message: "user not found!" });
+    } catch (error) {
+      console.log(error);
+      return response.json({ message: "Server unable to update user!" });
     }
   }
 

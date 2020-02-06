@@ -1,22 +1,28 @@
-# Adomail
-> A simple API built with [AdonisJS](https://adonisjs.com/)
+# Adonis API application
 
+This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
 
-### Configuration
+1. Bodyparser
+2. Authentication
+3. CORS
+4. Lucid ORM
+5. Migrations and seeds
 
-Create .env file and copy information from the .env.adomail.example.
+## Setup
 
-You need to add mailing information to be able to receive e-mail from the application.
+Use the adonis command to install the blueprint
 
-You can get test e-mail configuration settings from [Mailtrap](https://mailtrap.io/).
-
-Add variables for MAIL_USERNAME and MAIL_PASSWORD in the .env file.
+```bash
+adonis new yardstick --api-only
 ```
-# Install dependencies
-$ npm install
 
-# Add a .env file
+or manually clone the repo and then run `npm install`.
 
-# Launch server
-$ adonis serve --dev
+
+### Migrations
+
+Run the following command to run startup migrations.
+
+```js
+adonis migration:run
 ```

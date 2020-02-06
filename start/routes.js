@@ -25,8 +25,12 @@ Route.get("users", "UserController.show");
 Route.post("users", "UserController.store");
 Route.put("users/:id", "UserController.update");
 Route.delete("users/:id", "UserController.destroy");
-Route.post("users/password/email", "PasswordController.store");
-Route.put("users/password/:token/:email", "PasswordController.update");
+Route.post("users/password/email", "PasswordController.sendEmailToken");
+Route.get(
+  "users/password/email/:token/:email",
+  "PasswordController.showUserToken"
+);
+Route.put("users/password/email/:token/:email", "PasswordController.update");
 /*Route.group(() => {
   // updating username and password
   Route.put("users/:id", "UserController.update");
