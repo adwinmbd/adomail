@@ -23,7 +23,7 @@ class PasswordController {
           // registering when token was created and saving token
           user.token_created_at = new Date();
           user.token = token;
-          // persisting data (saving)
+          // saving user
           await user.save();
 
           await Mail.send("emails.recover", { user, token }, message => {
@@ -54,17 +54,15 @@ class PasswordController {
   }
 
   async showUserToken({ request, response, params }) {
-    const tokenProvided = params.token; // retrieving token in URL
-    const emailRequesting = params.email; // email requesting recovery
+    const tokenProvided = params.token; // retrieve token from URL
+    const emailRequesting = params.email; // retrieve e-mail from URL
 
     try {
-      // looking for user with the registered email
+      // looking for user with the e-mail provided
       const user = await User.findBy("email", emailRequesting);
 
       if (user) {
         // checking if token is still the same
-        // just to make sure that the user is not using an old link
-        // after requesting the password recovery again
         const sameToken = tokenProvided === user.token;
 
         if (!sameToken) {
@@ -85,7 +83,7 @@ class PasswordController {
             .status(401)
             .send({ message: { error: "Token expired" } });
         }
-
+        // displaying user from provided URL
         return user;
       }
     } catch (err) {
@@ -97,19 +95,17 @@ class PasswordController {
     }
   }
   async update({ request, response, params }) {
-    const tokenProvided = params.token; // retrieving token in URL
-    const emailRequesting = params.email; // email requesting recovery
+    const tokenProvided = params.token; // retrieve token from URL
+    const emailRequesting = params.email; // retrieve e-mail from URL
 
     const { newPassword } = request.only(["newPassword"]);
 
     try {
-      // looking for user with the registered email
+      // looking for user with the e-mail provided
       const user = await User.findBy("email", emailRequesting);
 
       if (user) {
         // checking if token is still the same
-        // just to make sure that the user is not using an old link
-        // after requesting the password recovery again
         const sameToken = tokenProvided === user.token;
 
         if (!sameToken) {
@@ -138,7 +134,7 @@ class PasswordController {
         user.token = null;
         user.token_created_at = 0;
 
-        // persisting data (saving)
+        // saving updated information
         await user.save();
         await Mail.send("emails.reset", { user }, message => {
           message.from("support@hello.com").to(emailRequesting);

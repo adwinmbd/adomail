@@ -16,7 +16,7 @@ class UserController {
       return response.status(err.status).send(err);
     }
   }
-  // creating and saving a new user (sign-up)
+  // create a new user
   async store({ request, response }) {
     try {
       // getting data passed within the request
@@ -25,14 +25,14 @@ class UserController {
       // looking for user in database
       const userExists = await User.findBy("email", data.email);
 
-      // if user exists don't save
+      // if user doesn't exists don't save
       if (userExists) {
         return response
           .status(400)
           .send({ message: { error: "User already registered" } });
       }
 
-      // if user doesn't exist, proceeds with saving him in DB
+      // if exists, save him
       const user = await User.create(data);
 
       return response.json({ message: "user added ..." });
@@ -67,7 +67,7 @@ class UserController {
         user.email = email;
         user.password = password;
 
-        // persisting new data (saving)
+        // saving updated information
         await user.save();
         return response.json({ message: "user updated!" });
       }

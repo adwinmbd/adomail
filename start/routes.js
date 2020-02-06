@@ -31,7 +31,3 @@ Route.get(
   "PasswordController.showUserToken"
 );
 Route.put("users/password/email/:token/:email", "PasswordController.update");
-/*Route.group(() => {
-  // updating username and password
-  Route.put("users/:id", "UserController.update");
-}).middleware(["auth"]);*/
