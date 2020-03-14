@@ -1,6 +1,6 @@
 # ADOMAIL
 
-> This project demonstrates a REST API with e-mail functionality using [AdonisJS](https://adonisjs.com/). It uses AdonisJS v4.1.
+> This project demonstrates a REST API with e-mail functionality using [AdonisJS](https://adonisjs.com/). It uses AdonisJS **v4.1**.
 
 ## Setup
 
