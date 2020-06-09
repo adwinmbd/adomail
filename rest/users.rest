@@ -27,7 +27,7 @@ content-type: application/json
 ### Delete user
 DELETE http://localhost:99/users/6 HTTP/1.1
 
-### Update e-mail
+### Send password reset e-mail
 POST http://localhost:99/users/password/email HTTP/1.1
 content-type: application/json
 
